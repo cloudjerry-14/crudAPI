@@ -13,11 +13,9 @@ cache:
 
 build:
   stage: build
+  image: maven:latest
   script:
     - mvn {MAVEN_CLI_OPTS} clean install
-
-  rules:
-    - if: ($BuildType == "CI" || $BuildType == "ci")
 
   tags:
     - shared
