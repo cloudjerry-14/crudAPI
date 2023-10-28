@@ -15,6 +15,7 @@ variables:
     - sudo apt-get update && sudo apt-get install jq
     - chmod +x fetch_db_pass.sh
     - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
+    - echo "DB_PASS in .pre-setup: $DB_PASS" 
     # You can use the exported DB_PASS in this job
 
 cache:
