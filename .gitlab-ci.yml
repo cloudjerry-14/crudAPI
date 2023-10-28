@@ -5,7 +5,7 @@ stages:
   - upload-s3
 
 include:
-  - local: scripts/fetch_pass.sh  # Include the script to fetch DB_PASS
+  - local: scripts/fetch_pass.yaml  # Include the script to fetch DB_PASS
 
 variables:
   MAVEN_CLI_OPTS: "-s setting.xml"
