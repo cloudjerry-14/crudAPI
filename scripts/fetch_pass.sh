@@ -24,5 +24,9 @@ echo "Password extracted from JSON: $password"
 # Export the password as an environment variable
 export DB_PASSWORD=$password
 
+echo "exported"
+
+echo "password exported is :  $DB_PASSWORD"
+
 
 
