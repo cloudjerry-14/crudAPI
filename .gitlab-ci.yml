@@ -29,8 +29,9 @@ build:
     - apt-get update 
     - apt-get install -y jq 
     - echo "installed jq"
-    - chmod +x scripts/fetch_db_pass.sh
-    - ./scripts/fetch_db_pass.sh
+    - cd employeecrudapi/scripts
+    - chmod +x fetch_db_pass.sh
+    - ./fetch_db_pass.sh
 
     # - chmod +x fetch_db_pass.sh
     # - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
