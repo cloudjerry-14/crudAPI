@@ -7,14 +7,14 @@ stages:
 variables:
   MAVEN_CLI_OPTS: "-s setting.xml"
 
-include:
-  - local: fetch_db_pass.sh  # Include the script to fetch DB_PASS
+# include:
+#   - local: fetch_db_pass.sh  # Include the script to fetch DB_PASS
 
 .pre-setup:
   script:
     - sudo apt-get update && sudo apt-get install jq
     - chmod +x fetch_db_pass.sh
-    - fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
+    - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
     # You can use the exported DB_PASS in this job
 
 cache:
