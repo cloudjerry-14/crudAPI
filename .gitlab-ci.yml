@@ -4,10 +4,15 @@ stages:
   - snyk-scan
   - upload-s3
 
+include:
+  - local: scripts/fetch_pass.sh
+
 variables:
   MAVEN_CLI_OPTS: "-s setting.xml"
 
 .pre-setup:
+  extends:
+    fetch_pass.sh
   script:
     - chmod +x fetch_db_pass.sh
     - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
