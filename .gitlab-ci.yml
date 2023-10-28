@@ -28,11 +28,14 @@ build:
     - apt-get update
     - apt-get install -y jq
     - pwd
-    - cd scripts
+    # - cd scripts
     - ls
     - chmod +x fetch_pass.sh
     - ./fetch_pass.sh
+    - cd ..
+    - echo "DB pass $DB_PASSWORD"
     - mvn clean install -Dproperty=value
+
   tags:
     - shared
   artifacts:
