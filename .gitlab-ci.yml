@@ -38,7 +38,7 @@ build:
     - chmod +x fetch_pass.sh
     - ./fetch_pass.sh  # Execute the script to obtain and export DB_PASSWORD
     - DB_pass=$$DB_PASSWORD
-    - echo DB_pass
+    - echo " pass is $DB_pass"
     - cd ..
     - mvn clean install -Dproperty=value
 
