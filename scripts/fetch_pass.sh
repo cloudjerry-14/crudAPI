@@ -24,8 +24,5 @@ echo "Password extracted from JSON: $password"
 # Export the password as an environment variable
 export DB_PASSWORD=$password
 
-# Export the DB_PASS variable
-export DB_PASS
 
-# Optionally, you can print the value for verification
-echo "DB_PASS: $DB_PASS"
+

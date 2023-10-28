@@ -34,11 +34,7 @@ build:
     - ls
     - chmod +x fetch_pass.sh
     - ./fetch_pass.sh
-
-    # - chmod +x fetch_db_pass.sh
-    # - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
-    # - echo "DB_PASS in .pre-setup: $DB_PASS" 
-    - if [ -z "$DB_PASS" ]; then echo "DB_PASS not available"; exit 1; fi
+    - if [ -z "$DB_PASSWORD" ]; then echo "DB_PASSWORD not available"; exit 1; fi
     - mvn clean install -Dproperty=value 
   tags:
     - shared
