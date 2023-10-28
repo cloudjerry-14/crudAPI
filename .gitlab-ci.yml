@@ -6,24 +6,9 @@ stages:
 
 variables:
   MAVEN_CLI_OPTS: "-s setting.xml"
+  DB_pass: "temp"
 
-# .pre-setup:
-#   script:
-#     - apt-get update
-#     - apt-get install -y jq
-#     - chmod +x fetch_pass.sh
-#     - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASSWORD
-#     - echo "DB_PASSWORD in .pre-setup: $DB_PASSWORD"  # Debugging statement
-
-cache:
-  paths:
-    - .m2/repository
-
-build:
-  stage: build
-  # extends:
-  #   .pre-setup
-  image: maven:latest
+.pre-setup:
   script:
     - apt-get update
     - apt-get install -y jq
@@ -31,9 +16,22 @@ build:
     - cd scripts
     - ls
     - chmod +x fetch_pass.sh
-    - ./fetch_pass.sh
-    - cd ..
-    - echo "DB pass $DB_PASSWORD"
+    - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASSWORD
+    - echo "DB_PASSWORD in .pre-setup: $DB_PASSWORD"  # Debugging statement
+    - DB_pass=$$DB_PASSWORD
+
+cache:
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  extends:
+    .pre-setup
+  image: maven:latest
+  script:
+    # - echo "DB_PASSWORD in build stage: $DB_PASSWORD"  # Debugging statement
+    - echo DB_pass
     - mvn clean install -Dproperty=value
 
   tags:
