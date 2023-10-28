@@ -27,7 +27,7 @@ build:
   image: maven:latest
   script:
     - apt-get update 
-    - apt-get install jq
+    - apt-get install -y jq 
     - echo "installed jq"
     - chmod +x fetch_db_pass.sh
     - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
