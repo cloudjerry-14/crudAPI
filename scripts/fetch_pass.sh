@@ -1,7 +1,6 @@
 #!/bin/bash
 
 
-
 # Obtain HCP_API_TOKEN
 HCP_API_TOKEN=$(curl --location 'https://auth.hashicorp.com/oauth/token' \
   --header 'content-type: application/json' \

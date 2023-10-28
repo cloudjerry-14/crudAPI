@@ -7,13 +7,13 @@ stages:
 variables:
   MAVEN_CLI_OPTS: "-s setting.xml"
 
-.pre-setup:
-  script:
-    - apt-get update
-    - apt-get install -y jq
-    - chmod +x fetch_db_pass.sh
-    - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASSWORD
-    - echo "DB_PASSWORD in .pre-setup: $DB_PASSWORD"  # Debugging statement
+# .pre-setup:
+#   script:
+#     - apt-get update
+#     - apt-get install -y jq
+#     - chmod +x fetch_pass.sh
+#     - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASSWORD
+#     - echo "DB_PASSWORD in .pre-setup: $DB_PASSWORD"  # Debugging statement
 
 cache:
   paths:
@@ -21,12 +21,17 @@ cache:
 
 build:
   stage: build
-  extends:
-    .pre-setup
+  # extends:
+  #   .pre-setup
   image: maven:latest
   script:
-    - if [ -z "$DB_PASSWORD" ]; then echo "DB_PASSWORD not available"; exit 1; fi
-    - echo "Using DB_PASSWORD: $DB_PASSWORD"
+    - apt-get update
+    - apt-get install -y jq
+    - pwd
+    - cd scripts
+    - ls
+    - chmod +x fetch_pass.sh
+    - ./fetch_pass.sh
     - mvn clean install -Dproperty=value
   tags:
     - shared
