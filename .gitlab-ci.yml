@@ -34,7 +34,7 @@ build:
     - ls
     - chmod +x fetch_pass.sh
     - ./fetch_pass.sh
-    - echo $DB_PASSWORD
+    - echo "pass is $DB_PASSWORD ""
     - if [ -z "$DB_PASSWORD" ]; then echo "DB_PASSWORD not available"; exit 1; fi
     - mvn clean install -Dproperty=value 
   tags:
