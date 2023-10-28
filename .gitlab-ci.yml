@@ -3,9 +3,15 @@ stages:
   - test
   - snyk-scan
   - upload-s3
-  
+
 variables:
   MAVEN_CLI_OPTS: "-s setting.xml"
+
+.pre-setup:
+  script:
+    - chmod +x fetch_db_pass.sh
+    - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
+    # You can use the exported DB_PASS in this job
 
 cache:
   paths:
@@ -13,16 +19,16 @@ cache:
 
 build:
   stage: build
+  extends:
+    .pre-setup
   image: maven:latest
   script:
-    - mvn clean install -Dproperty=value -DskipTests
-
+    - if [ -z "$DB_PASS" ]; then echo "DB_PASS not available"; exit 1; fi
+    - mvn clean install -Dproperty=value 
   tags:
     - shared
-
   artifacts:
     when: always
-    expire_in: 30days
+    expire_in: 30 days
     paths:
-      - mkdir builds/EmployeeApp
       - builds/EmployeeApp
