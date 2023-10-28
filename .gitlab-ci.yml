@@ -10,13 +10,13 @@ variables:
 # include:
 #   - local: fetch_db_pass.sh  # Include the script to fetch DB_PASS
 
-.pre-setup:
-  script:
-    - sudo apt-get update && sudo apt-get install jq
-    - chmod +x fetch_db_pass.sh
-    - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
-    - echo "DB_PASS in .pre-setup: $DB_PASS" 
-    # You can use the exported DB_PASS in this job
+# .pre-setup:
+#   script:
+#     - sudo apt-get update && sudo apt-get install jq
+#     - chmod +x fetch_db_pass.sh
+#     - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
+#     - echo "DB_PASS in .pre-setup: $DB_PASS" 
+#     # You can use the exported DB_PASS in this job
 
 cache:
   paths:
@@ -24,10 +24,14 @@ cache:
 
 build:
   stage: build
-  extends:
-    .pre-setup
   image: maven:latest
   script:
+    - sudo apt-get update 
+    - sudo apt-get install jq
+    - echo "installed jq"
+    - chmod +x fetch_db_pass.sh
+    - ./fetch_db_pass.sh  # Execute the script to obtain and export DB_PASS
+    # - echo "DB_PASS in .pre-setup: $DB_PASS" 
     - if [ -z "$DB_PASS" ]; then echo "DB_PASS not available"; exit 1; fi
     - mvn clean install -Dproperty=value 
   tags:
